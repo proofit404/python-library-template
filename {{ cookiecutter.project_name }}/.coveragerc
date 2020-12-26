@@ -1,0 +1,16 @@
+[run]
+branch = true
+parallel = true
+source =
+  {{ cookiecutter.private_module_name }}
+  {{ cookiecutter.public_module_name }}
+  configuration
+  examples
+  helpers
+  mddoctest
+  tests
+
+[paths]
+source =
+  src
+  .tox/*/site-packages

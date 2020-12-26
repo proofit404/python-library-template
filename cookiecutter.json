@@ -1,0 +1,17 @@
+{
+    "project_name": "the-library",
+    "public_module_name": "{{ cookiecutter.project_name|lower|replace('-', '_') }}",
+    "private_module_name": "_{{ cookiecutter.public_module_name }}",
+    "exception_name": "{{ cookiecutter.public_module_name.split('_')|map('capitalize')|join('') }}Error",
+    "project_version": "0.0.1dev0",
+    "project_description": "The library description.",
+    "author_name": "Artem Malyshev",
+    "author_email": "proofit404@gmail.com",
+    "github_user": "proofit404",
+    "github_repository": "https://github.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}",
+    "issues_url": "{{ cookiecutter.github_repository }}/issues",
+    "documentation_url": "https://{{ cookiecutter.github_user }}.github.io/{{ cookiecutter.project_name }}",
+    "changelog_url": "{{ cookiecutter.documentation_url }}/changelog",
+    "pypi_project": "https://pypi.org/project/{{ cookiecutter.project_name }}",
+    "azure_definition_id": 1
+}
