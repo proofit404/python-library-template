@@ -25,12 +25,7 @@ A line of text explaining snippet below…
 
 ```pycon
 
->>> from {{ cookiecutter.public_module_name }} import func
-
->>> func()
-Traceback (most recent call last):
-  ...
-{{ cookiecutter.private_module_name }}.exceptions.{{ cookiecutter.exception_name }}
+>>> from {{ cookiecutter.public_module_name }} import *
 
 ```
 
