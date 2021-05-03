@@ -163,13 +163,7 @@ export default async (): undefined => {
     return;
   }
 
-  for (const label of [
-    "blocked",
-    "invalid",
-    "needs investigation",
-    "question",
-    "wontfix",
-  ]) {
+  for (const label of ["blocked", "question"]) {
     if (issueLabels.has(label)) {
       fail(`Issues marked as ${label} can not be implemented`);
       return;
@@ -202,11 +196,8 @@ export default async (): undefined => {
     "bug",
     "documentation",
     "feature",
-    "invalid",
-    "needs investigation",
     "question",
     "released",
-    "wontfix",
   ]);
 
   for (const repoLabel of labelsJSON.data) {
