@@ -129,7 +129,9 @@ export default async (): undefined => {
     hasIncompatibleLabel = issueLabels.has("backward incompatible"),
     hasFeatureLabel = issueLabels.has("feature"),
     hasBugLabel = issueLabels.has("bug"),
-    hasDocumentationLabel = issueLabels.has("documentation");
+    hasDocumentationLabel = issueLabels.has("documentation"),
+    hasQuestionLabel = issueLabels.has("question"),
+    hasBlockedLabel = issueLabels.has("blocked");
 
   if (hasFeatureLabel & hasBugLabel) {
     fail("An issue can't be a bug and a feature simultaneously");
@@ -163,11 +165,14 @@ export default async (): undefined => {
     return;
   }
 
-  for (const label of ["blocked", "question"]) {
-    if (issueLabels.has(label)) {
-      fail(`Issues marked as ${label} can not be implemented`);
-      return;
-    }
+  if (hasQuestionLabel & !hasDocsCommit) {
+    fail("Issue marked as question should have docs commit");
+    return;
+  }
+
+  if (hasBlockedLabel) {
+    fail("Issues marked as blocked can not be implemented");
+    return;
   }
 
   const issueText = issueJSON.data.body,
