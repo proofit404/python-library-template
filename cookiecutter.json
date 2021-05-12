@@ -12,6 +12,7 @@
     "issues_url": "{{ cookiecutter.github_repository }}/issues",
     "documentation_url": "https://{{ cookiecutter.github_user }}.github.io/{{ cookiecutter.project_name }}",
     "changelog_url": "{{ cookiecutter.documentation_url }}/changelog",
+    "twitter_url": "https://twitter.com/proofit404",
     "pypi_project": "https://pypi.org/project/{{ cookiecutter.project_name }}",
     "azure_definition_id": 1
 }
