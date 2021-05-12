@@ -27,3 +27,4 @@ python = "~3.6 || ~3.7 || ~3.8 || ~3.9"
 [tool.poetry.urls]
 Changelog = "{{ cookiecutter.changelog_url }}"
 Issues = "{{ cookiecutter.issues_url }}"
+Twitter = "{{ cookiecutter.twitter_url }}"
