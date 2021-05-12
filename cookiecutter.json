@@ -3,7 +3,6 @@
     "public_module_name": "{{ cookiecutter.project_name|lower|replace('-', '_') }}",
     "private_module_name": "_{{ cookiecutter.public_module_name }}",
     "exception_name": "{{ cookiecutter.public_module_name.split('_')|map('capitalize')|join('') }}Error",
-    "project_version": "0.0.1dev0",
     "project_description": "The library description.",
     "author_name": "Artem Malyshev",
     "author_email": "proofit404@gmail.com",
