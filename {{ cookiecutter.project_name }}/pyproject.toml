@@ -19,7 +19,7 @@ packages = [
 ]
 readme = "docs/index.md"
 repository = "{{ cookiecutter.github_repository }}"
-version = "{{ cookiecutter.project_version }}"
+version = "0.0.1dev0"
 
 [tool.poetry.dependencies]
 python = "~3.6 || ~3.7 || ~3.8 || ~3.9"
