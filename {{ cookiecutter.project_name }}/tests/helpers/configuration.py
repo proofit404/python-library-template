@@ -2,6 +2,7 @@ import collections
 import configparser
 import datetime
 import itertools
+import os.path
 import re
 import subprocess
 import textwrap
@@ -12,7 +13,7 @@ import yaml
 
 def _main():
     _azure_install_python_interpreters()
-    _azure_release_use_max_base_python()
+    _azure_release_job_use_max_base_python()
     _tox_environments_use_all_pyenv_versions()
     _tox_environments_use_max_base_python()
     _tox_envlist_contains_all_tox_environments()
@@ -29,6 +30,7 @@ def _main():
     _ini_files_boolean_case()
     _lock_files_not_committed()
     _license_year()
+    _docs_footer()
     _tox_environments_are_ordered()
     _tox_settings_are_ordered()
     _tox_deps_are_ordered()
@@ -58,7 +60,7 @@ def _azure_install_python_interpreters():
     assert versions == installed
 
 
-def _azure_release_use_max_base_python():
+def _azure_release_job_use_max_base_python():
     version = max(f"{major}.{minor}" for major, minor in _pyenv_versions())
     installed = _azure_pipelines("jobs", 1, "steps", 0, "inputs", "versionSpec")
     assert version == installed
@@ -196,6 +198,17 @@ def _license_year():
         if found:
             year = int(found[-1])
             assert year == current_year
+
+
+def _docs_footer():
+    footer = """
+<p align="center">&mdash; ⭐ &mdash;</p>
+<p align="center"><i>The <code>the-library</code> library is part of the SOLID python family.</i></p>
+""".lstrip()  # noqa: E501
+    documents = _values(_mkdocs_yml()["nav"])
+    for document in documents:
+        content = open(os.path.join("docs", document)).read()
+        assert content.endswith(footer)
 
 
 def _tox_environments_are_ordered():
@@ -376,10 +389,8 @@ def _tox_section_name(string):
     return re.sub(r"^testenv:", "", string)
 
 
-Variable = collections.namedtuple("Variable", ("env", "value"))
-
-
 def _tox_config_values(variable):
+    Variable = collections.namedtuple("Variable", ("env", "value"))
     ini_parser = _tox_ini()
     for section in ini_parser:
         if variable in ini_parser[section]:
@@ -394,6 +405,17 @@ def _text(value):
 
 def _lines(value):
     return _text(value).splitlines()
+
+
+def _values(arg):
+    if isinstance(arg, dict):
+        for v in arg.values():
+            yield from _values(v)
+    elif isinstance(arg, list):
+        for v in arg:
+            yield from _values(v)
+    else:
+        yield arg
 
 
 def _git_files():
@@ -459,6 +481,10 @@ def _pyenv_interpreters():
 
 def _pyproject_toml():
     return tomlkit.loads(open("pyproject.toml").read())
+
+
+def _mkdocs_yml():
+    return yaml.safe_load(open("mkdocs.yml").read())
 
 
 if __name__ == "__main__":  # pragma: no branch
