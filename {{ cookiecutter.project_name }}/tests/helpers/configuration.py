@@ -35,6 +35,7 @@ def _main():
     _tox_settings_are_ordered()
     _tox_deps_are_ordered()
     _tox_whitelist_externals_are_ordered()
+    _tox_setenv_are_ordered()
     _packages_are_ordered()
     _build_requires_are_ordered()
     _flake8_per_file_ignores_are_ordered()
@@ -245,6 +246,12 @@ def _tox_whitelist_externals_are_ordered():
     for externals in _tox_config_values("whitelist_externals"):
         externals = _lines(externals.value)
         assert externals == sorted(externals)
+
+
+def _tox_setenv_are_ordered():
+    for setenv in _tox_config_values("setenv"):
+        setenv = _lines(setenv.value)
+        assert setenv == sorted(setenv)
 
 
 def _packages_are_ordered():
