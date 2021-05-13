@@ -1,7 +1,8 @@
-import collections
+{% raw %}import collections
 import configparser
 import datetime
 import itertools
+import json
 import os.path
 import re
 import subprocess
@@ -208,9 +209,10 @@ def _license_year():
 
 
 def _docs_footer():
-    footer = """
+    project_name = _cruft_json()["context"]["cookiecutter"]["project_name"]
+    footer = f"""
 <p align="center">&mdash; ⭐ &mdash;</p>
-<p align="center"><i>The <code>the-library</code> library is part of the SOLID python family.</i></p>
+<p align="center"><i>The <code>{project_name}</code> library is part of the SOLID python family.</i></p>
 """.lstrip()  # noqa: E501
     documents = _values(_mkdocs_yml()["nav"])
     for document in documents:
@@ -500,5 +502,9 @@ def _mkdocs_yml():
     return yaml.safe_load(open("mkdocs.yml").read())
 
 
+def _cruft_json():
+    return json.loads(open(".cruft.json").read())
+
+
 if __name__ == "__main__":  # pragma: no branch
-    _main()
+    _main(){% endraw %}
