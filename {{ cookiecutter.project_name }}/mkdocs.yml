@@ -13,7 +13,6 @@ theme:
     repo: fontawesome/brands/github
   language: en
   features:
-    - navigation.instant
     - navigation.tabs
 repo_name: {{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}
 repo_url: {{ cookiecutter.github_repository }}
