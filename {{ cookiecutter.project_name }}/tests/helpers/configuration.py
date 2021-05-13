@@ -29,6 +29,7 @@ def _main():
     _ini_files_indentation()
     _ini_files_boolean_case()
     _lock_files_not_committed()
+    _symbolic_links()
     _license_year()
     _docs_footer()
     _tox_environments_are_ordered()
@@ -184,6 +185,11 @@ def _ini_files_boolean_case():
 
 def _lock_files_not_committed():
     assert "poetry.lock" not in _git_files()
+
+
+def _symbolic_links():
+    for filename in ["README.md", ".prettierignore"]:
+        assert os.path.islink(filename)
 
 
 def _license_year():
