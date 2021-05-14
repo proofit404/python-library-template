@@ -1,9 +1,9 @@
 # {{ cookiecutter.public_module_name.replace('_', ' ')|capitalize }}
 
-[![azure-devops-builds](https://img.shields.io/azure-devops/build/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/{{ cookiecutter.azure_definition_id }}?style=flat-square)](https://dev.azure.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/_build/latest?definitionId={{ cookiecutter.azure_definition_id }}&branchName=master)
-[![azure-devops-coverage](https://img.shields.io/azure-devops/coverage/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/{{ cookiecutter.azure_definition_id }}?style=flat-square)](https://dev.azure.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/_build/latest?definitionId={{ cookiecutter.azure_definition_id }}&branchName=master)
-[![pypi](https://img.shields.io/pypi/v/{{ cookiecutter.project_name }}?style=flat-square)]({{ cookiecutter.pypi_project }})
-[![python](https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_name }}?style=flat-square)]({{ cookiecutter.pypi_project }})
+[![azure-devops-builds]({{ cookiecutter.azure_build_badge_url }})]({{ cookiecutter.azure_build_url }})
+[![azure-devops-coverage]({{ cookiecutter.azure_coverage_badge_url }})]({{ cookiecutter.azure_coverage_url }})
+[![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
+[![python]({{ cookiecutter.python_version_badge_url }})]({{ cookiecutter.pypi_project }})
 
 {{ cookiecutter.project_description }}
 
