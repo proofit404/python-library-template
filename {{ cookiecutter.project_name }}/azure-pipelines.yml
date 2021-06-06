@@ -86,6 +86,10 @@ jobs:
           versionSpec: "12.x"
         displayName: Install NodeJS.
       - script: |
+          git config --local user.name "{{ cookiecutter.author_name }}"
+          git config --local user.email "{{ cookiecutter.author_email }}"
+        displayName: Tweak git settings.
+      - script: |
           git remote set-branches origin master
           git fetch --quiet
           git checkout master --quiet
