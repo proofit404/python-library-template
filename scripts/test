@@ -6,7 +6,7 @@ set -o pipefail
 
 echo "==> Generate new project…"
 mkdir ../Temp
-cruft create -y -c HEAD --output-dir=../Temp .
+cookiecutter --no-input --output-dir=../Temp .
 cd ../Temp/*
 rm README.md .prettierignore
 ln -s docs/index.md README.md
