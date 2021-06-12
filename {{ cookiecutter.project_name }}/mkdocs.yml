@@ -2,6 +2,7 @@
 strict: true
 site_name: {{ cookiecutter.project_name }}
 site_description: {{ cookiecutter.project_description }}
+site_url: {{ cookiecutter.documentation_url }}
 theme:
   name: material
   palette:
