@@ -1,5 +1,6 @@
 module.exports = {
   repositoryUrl: "{{ cookiecutter.github_repository }}",
+  branches: ["release", { name: "develop", prerelease: "rc" }],
   tagFormat: "${version}",
   plugins: [
     "@semantic-release/commit-analyzer",
