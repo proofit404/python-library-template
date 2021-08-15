@@ -34,7 +34,7 @@ trigger:
         displayName: Install PyPy.
       - task: NodeTool@0
         inputs:
-          versionSpec: "12.x"
+          versionSpec: "16.6.2"
         displayName: Install NodeJS.
       - script: |
           git checkout release
@@ -91,7 +91,7 @@ trigger:
         displayName: Install Python.
       - task: NodeTool@0
         inputs:
-          versionSpec: "12.x"
+          versionSpec: "16.6.2"
         displayName: Install NodeJS.
       - script: |
           git config --local user.name "{{ cookiecutter.author_name }}"
