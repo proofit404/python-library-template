@@ -8,9 +8,8 @@ echo "==> Generate new project…"
 mkdir ../Temp
 cookiecutter --no-input --output-dir=../Temp .
 cd ../Temp/*
-rm README.md .prettierignore
+rm README.md
 ln -s docs/index.md README.md
-ln -s .gitignore .prettierignore
 
 echo "==> Initialize repository…"
 git init
