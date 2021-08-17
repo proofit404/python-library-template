@@ -43,12 +43,11 @@ trigger:
         displayName: Unshallow commit log.
       - script: pip install --upgrade tox
         displayName: Install Tox.
-      - script: tox -p auto
+      - script: tox
         env:
           CI_PYTEST_FLAGS: >-
             --junitxml=junit-{envname}.xml -o junit_suite_name={envname} -o
             junit_family=xunit2 -o junit_log_passing_tests=true
-          TOX_PARALLEL_NO_SPINNER: 1
         displayName: Run Tox.
       - script: .tox/mutmut/bin/mutmut junitxml > junit-mutmut.xml
         condition: always()
