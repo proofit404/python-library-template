@@ -68,7 +68,7 @@ trigger:
           summaryFileLocation: coverage.xml
         displayName: Publish coverage report.
       - script: |
-          npm install --no-save --no-package-lock danger typescript
+          npm install --save-dev danger typescript
         condition: eq(variables['should_review'], 'true')
         displayName: Install Danger.
       - script: npx danger ci
@@ -107,9 +107,8 @@ trigger:
           echo '##vso[task.prependpath]$(HOME)/.poetry/bin'
         displayName: Install Poetry.
       - script: >-
-          npm install --no-save --no-package-lock semantic-release
-          @semantic-release/changelog @semantic-release/exec
-          @semantic-release/git
+          npm install --save-dev semantic-release @semantic-release/changelog
+          @semantic-release/exec @semantic-release/git
         displayName: Install Semantic Release.
       - script: |
           npx semantic-release
