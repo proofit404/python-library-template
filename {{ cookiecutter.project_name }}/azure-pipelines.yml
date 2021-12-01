@@ -80,6 +80,8 @@ trigger:
           GITHUB_TOKEN: $(DANGER_GITHUB_TOKEN)
         displayName: Review pull request.
   - job: "Deploy"
+    pool:
+      vmImage: "ubuntu-latest"
     dependsOn:
       - "Test"
     condition: and(succeeded(), eq(variables['should_deploy'], 'true'))
