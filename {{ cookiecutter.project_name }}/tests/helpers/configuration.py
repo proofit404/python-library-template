@@ -3,15 +3,23 @@ import configparser
 import datetime
 import itertools
 import os.path
+import platform
 import re
 import subprocess
 import textwrap
 
+import better_exceptions
 import tomlkit
 import yaml
 
 
+better_exceptions.MAX_LENGTH = None
+
+better_exceptions.hook()
+
+
 def _main():
+    _virtual_environment_use_max_python()
     _azure_install_python_interpreters()
     _azure_release_job_use_max_base_python()
     _tox_environments_use_all_pyenv_versions()
@@ -30,6 +38,8 @@ def _main():
     _ini_files_boolean_case()
     _lock_files_not_committed()
     _symbolic_links()
+    _flake8_exclude_matches_gitignore()
+    _yamllint_ignore_matches_gitignore()
     _license_year()
     _docs_footer()
     _tox_environments_are_ordered()
@@ -41,12 +51,17 @@ def _main():
     _build_requires_are_ordered()
     _flake8_per_file_ignores_are_ordered()
     _flake8_ignored_errors_are_ordered()
-    _yamllint_ignored_patterns_are_ordered()
     _poetry_avoid_additional_dependencies()
     _pre_commit_hooks_avoid_additional_dependencies()
     _tox_deps_not_pinned()
     _build_requires_not_pinned()
     _pre_commit_hooks_not_pinned()
+
+
+def _virtual_environment_use_max_python():
+    current = platform.python_version().split(".")[0:2]
+    version = max([major, minor] for major, minor in _pyenv_versions())
+    assert current == version
 
 
 def _azure_install_python_interpreters():
@@ -84,7 +99,9 @@ def _tox_environments_use_max_base_python():
 
 
 def _tox_envlist_contains_all_tox_environments():
-    assert _tox_envlist() == _tox_config_environments()
+    envlist = _tox_envlist()
+    config_environments = _tox_config_environments()
+    assert envlist == config_environments
 
 
 def _tox_no_default_environment():
@@ -188,8 +205,20 @@ def _lock_files_not_committed():
 
 
 def _symbolic_links():
-    for filename in ["README.md"]:
+    for filename in ["README.md", ".prettierignore", ".remarkignore", ".eslintignore"]:
         assert os.path.islink(filename)
+
+
+def _flake8_exclude_matches_gitignore():
+    flake8_exclude = _lines(_flake8()["flake8"]["exclude"])
+    git_ignore = _lines(_gitignore())
+    assert flake8_exclude == git_ignore
+
+
+def _yamllint_ignore_matches_gitignore():
+    yamllint_ignore = _lines(_yamllint()["ignore"])
+    git_ignore = _lines(_gitignore())
+    assert yamllint_ignore == git_ignore
 
 
 def _license_year():
@@ -208,10 +237,7 @@ def _license_year():
 
 
 def _docs_footer():
-    footer = """
-<p align="center">&mdash; ⭐ &mdash;</p>
-<p align="center"><i>The <code>{{ cookiecutter.project_name }}</code> library is part of the SOLID python family.</i></p>
-""".lstrip()  # noqa: E501
+    footer = '<p align="center">&mdash; ⭐ &mdash;</p>\n'
     documents = _values(_mkdocs_yml()["nav"])
     for document in documents:
         content = open(os.path.join("docs", document)).read()
@@ -221,7 +247,7 @@ def _docs_footer():
 def _tox_environments_are_ordered():
     tox_ini = open("tox.ini").read()
     offsets = [
-        (re.search(fr"[testenv:(\w*,)?{e}(\w*,)?]", tox_ini).start(), e)
+        (re.search(rf"[testenv:(\w*,)?{e}(\w*,)?]", tox_ini).start(), e)
         for e in _tox_envlist()
     ]
     assert offsets == sorted(offsets, key=lambda key: key[0])
@@ -284,11 +310,6 @@ def _flake8_ignored_errors_are_ordered():
     assert ignore == sorted(ignore)
 
 
-def _yamllint_ignored_patterns_are_ordered():
-    ignore = _lines(_yamllint()["ignore"])
-    assert ignore == sorted(ignore)
-
-
 def _poetry_avoid_additional_dependencies():
     deps = list(_pyproject_toml()["tool"]["poetry"]["dependencies"])
     assert deps == ["python"]
@@ -310,7 +331,7 @@ def _build_requires_not_pinned():
 
 
 def _pre_commit_hooks_not_pinned():
-    assert all(repo["rev"] == "master" for repo in _pre_commit_yaml()["repos"])
+    assert all(repo["rev"] == "main" for repo in _pre_commit_yaml()["repos"])
 
 
 class _Settings:
@@ -332,7 +353,9 @@ class _Settings:
         ("setenv", _Text),
         ("passenv", _Text),
         ("deps", _Text),
+        ("commands_pre", _Text),
         ("commands", _Text),
+        ("commands_post", _Text),
         ("depends", _Text),
         ("whitelist_externals", _Text),
     ]
@@ -375,18 +398,21 @@ def _tox_split_envlist(string):
 
 
 def _tox_expand_names(string):
+    # => _tox_expand_names('py{37,38},doctest')
+    # -> ['py37', 'py38', 'doctest']
     # => _tox_expand_names('py{37,38}')
     # -> ['py37', 'py38']
     # => _tox_expand_names('doctest')
     # -> ['doctest']
-    if "{" not in string:
-        yield string
-    else:
-        parts = re.split(r"{|}", string)
-        index = [i for i, p in enumerate(parts) if "," in p][0]
-        subs = parts[index].split(",")
-        for s in subs:
-            yield "".join(parts[:index] + [s])
+    for part in _tox_split_envlist(string):
+        if "{" not in part:
+            yield part
+        else:
+            pieces = re.split(r"{|}", part)
+            index = [i for i, p in enumerate(pieces) if "," in p][0]
+            subs = pieces[index].split(",")
+            for s in subs:
+                yield "".join(pieces[:index] + [s])
 
 
 def _tox_config_environments():
@@ -498,6 +524,10 @@ def _pyproject_toml():
 
 def _mkdocs_yml():
     return yaml.safe_load(open("mkdocs.yml").read())
+
+
+def _gitignore():
+    return open(".gitignore").read()
 
 
 if __name__ == "__main__":  # pragma: no branch

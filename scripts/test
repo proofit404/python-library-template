@@ -9,7 +9,13 @@ mkdir ../Temp
 cookiecutter --no-input --output-dir=../Temp .
 cd ../Temp/*
 rm README.md
+rm .prettierignore
+rm .remarkignore
+rm .eslintignore
 ln -s docs/index.md README.md
+ln -s .gitignore .prettierignore
+ln -s .gitignore .remarkignore
+ln -s .gitignore .eslintignore
 
 echo "==> Initialize repository…"
 git init
@@ -20,4 +26,6 @@ git add .
 git commit -m 'build: initialize project'
 
 echo "==> Run project tests…"
-tox
+./scripts/install
+./scripts/check
+./scripts/test
