@@ -4,5 +4,5 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-echo "==> Serving documentation…"
-mkdocs serve
+echo "==> Running danger…"
+npx danger ci

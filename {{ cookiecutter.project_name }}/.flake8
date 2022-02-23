@@ -6,3 +6,5 @@ ignore = D105, D107, E741, W503
 per-file-ignores =
   src/{{ cookiecutter.private_module_name }}/*.py: D100, D104
   tests/helpers/*.py: D100, D104
+exclude =
+  {% macro op() %}{% include '.gitignore' %}{% endmacro %}{{ op() | indent(2) -}}

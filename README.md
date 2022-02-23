@@ -40,4 +40,3 @@ interested in it.
 `python-library-template` is offered under the two clause BSD license.
 
 <p align="center">&mdash; ⭐ &mdash;</p>
-<p align="center"><i>The <code>python-library-template</code> is part of the SOLID python family.</i></p>
