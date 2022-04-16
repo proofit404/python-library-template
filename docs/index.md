@@ -13,13 +13,13 @@ Python library template focused on code quality and security.
 First, install dependencies:
 
 ```bash
-$ pip install cookiecutter
+$ pip install cruft
 ```
 
 Create project:
 
 ```bash
-$ cookiecutter gh:proofit404/python-library-template
+$ cruft create https://github.com/proofit404/python-library-template
 ```
 
 ### GitHub repository

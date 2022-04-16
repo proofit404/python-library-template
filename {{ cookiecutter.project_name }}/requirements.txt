@@ -3,6 +3,7 @@ better_exceptions
 black
 blacken-docs
 coverage
+cruft
 docformatter
 flake8
 flake8-2020
