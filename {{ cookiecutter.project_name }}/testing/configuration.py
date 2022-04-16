@@ -144,16 +144,16 @@ def _coverage_include_all_packages():
     coverage_sources = _coveragerc()["run"]["source"].strip().splitlines()
 
     packages = set()
-    helpers = set()
+    testing = set()
 
     for f in _git_files():
         parts = [re.sub(r"\.py$", "", p) for p in f.split("/")]
         if len(parts) > 1 and parts[0] == "src":
             packages.add(parts[1])
-        if len(parts) > 2 and parts[0] == "tests" and parts[1] == "helpers":
-            helpers.add(parts[2])
+        if len(parts) > 1 and parts[0] == "testing":
+            testing.add(parts[1])
 
-    assert coverage_sources == sorted(packages) + sorted(helpers) + ["tests"]
+    assert coverage_sources == sorted(packages) + sorted(testing) + ["tests"]
 
 
 def _coverage_environment_runs_at_the_end():

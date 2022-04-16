@@ -7,7 +7,7 @@ set -o pipefail
 . venv/bin/activate
 
 echo "==> Checking configuration…"
-PYTHONPATH=$PWD/tests/helpers coverage run -m configuration
+PYTHONPATH=$PWD/testing coverage run -m configuration
 
 echo "==> Running pre-commit…"
 pre-commit run --all-files --show-diff-on-failure
@@ -16,7 +16,7 @@ echo "==> Running pyupgrade…"
 git ls-files '*.py' | xargs pyupgrade --py37-plus
 
 echo "==> Running reorder-python-imports…"
-git ls-files '*.py' | xargs reorder-python-imports --application-directories=.:src:tests/helpers
+git ls-files '*.py' | xargs reorder-python-imports --application-directories=.:src:testing
 
 echo "==> Running docformatter…"
 git ls-files '*.py' | xargs docformatter --wrap-summaries 88 --wrap-descriptions 88 --blank --check
