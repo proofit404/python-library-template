@@ -33,7 +33,6 @@ def _main():
     _tox_no_unknown_settings()
     _coverage_include_all_packages()
     _coverage_environment_runs_at_the_end()
-    _poetry_python_version_use_all_pyenv_versions()
     _ini_files_indentation()
     _ini_files_boolean_case()
     _lock_files_not_committed()
@@ -54,20 +53,21 @@ def _main():
     _poetry_avoid_additional_dependencies()
     _pre_commit_hooks_avoid_additional_dependencies()
     _tox_deps_not_pinned()
+    _python_version_not_pinned()
     _build_requires_not_pinned()
     _pre_commit_hooks_not_pinned()
 
 
 def _virtual_environment_use_max_python():
-    current = platform.python_version().split(".")[0:2]
-    version = max([major, minor] for major, minor in _pyenv_versions())
+    current = tuple(map(int, platform.python_version().split(".")[0:2]))
+    version = max(_pyenv_versions())
     assert current == version
 
 
 def _azure_install_python_interpreters():
     versions = [
         f"{major}.{minor}" if interpreter == "cpython" else f"{interpreter}{major}"
-        for interpreter, (major, minor) in _pyenv_interpreters()
+        for interpreter, (major, minor) in sorted(_pyenv_interpreters())
     ]
     installed = [
         s["inputs"]["versionSpec"]
@@ -78,7 +78,7 @@ def _azure_install_python_interpreters():
 
 
 def _azure_release_job_use_max_base_python():
-    version = max(f"{major}.{minor}" for major, minor in _pyenv_versions())
+    version = ".".join(map(str, max(_pyenv_versions())))
     installed = _azure_pipelines("jobs", 1, "steps", 0, "inputs", "versionSpec")
     assert version == installed
 
@@ -93,7 +93,7 @@ def _tox_environments_use_all_pyenv_versions():
 
 
 def _tox_environments_use_max_base_python():
-    version = max(f"python{major}.{minor}" for major, minor in _pyenv_versions())
+    version = "python" + ".".join(map(str, max(_pyenv_versions())))
     for basepython in _tox_config_values("basepython"):
         assert basepython.value == version
 
@@ -168,14 +168,6 @@ def _coverage_environment_runs_at_the_end():
         if "coverage run" in commands
     ]
     assert coverage_depends == runs_coverage
-
-
-def _poetry_python_version_use_all_pyenv_versions():
-    pyenv_version = " || ".join(
-        f"~{major}.{minor}" for major, minor in _pyenv_versions()
-    )
-    poetry_version = _pyproject_toml()["tool"]["poetry"]["dependencies"]["python"]
-    assert pyenv_version == poetry_version
 
 
 def _ini_files_indentation():
@@ -323,6 +315,11 @@ def _pre_commit_hooks_avoid_additional_dependencies():
 def _tox_deps_not_pinned():
     for deps in _tox_config_values("deps"):
         assert "=" not in deps.value
+
+
+def _python_version_not_pinned():
+    poetry_version = _pyproject_toml()["tool"]["poetry"]["dependencies"]["python"]
+    assert poetry_version == "*"
 
 
 def _build_requires_not_pinned():
@@ -514,7 +511,7 @@ def _pyenv_interpreters():
     for v in open(".python-version").read().splitlines():
         m = re.match(r"^([a-z]+)?([0-9.]+)", v)
         interpreter = m.group(1) or "cpython"
-        version = m.group(2).split(".")[0:2]
+        version = tuple(map(int, m.group(2).split(".")[0:2]))
         yield interpreter, version
 
 

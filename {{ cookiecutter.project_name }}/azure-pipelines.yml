@@ -18,10 +18,6 @@ trigger:
     steps:
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: "3.7"
-        displayName: Install Python 3.7.
-      - task: UsePythonVersion@0
-        inputs:
           versionSpec: "3.8"
         displayName: Install Python 3.8.
       - task: UsePythonVersion@0
@@ -30,11 +26,15 @@ trigger:
         displayName: Install Python 3.9.
       - task: UsePythonVersion@0
         inputs:
+          versionSpec: "3.10"
+        displayName: Install Python 3.10.
+      - task: UsePythonVersion@0
+        inputs:
           versionSpec: pypy3
         displayName: Install PyPy.
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.6.2"
+          versionSpec: "16.14.2"
         displayName: Install NodeJS.
       - script: |
           git checkout release
@@ -64,11 +64,11 @@ trigger:
     steps:
       - task: UsePythonVersion@0
         inputs:
-          versionSpec: "3.9"
-        displayName: Install Python.
+          versionSpec: "3.10"
+        displayName: Install Python 3.10.
       - task: NodeTool@0
         inputs:
-          versionSpec: "16.6.2"
+          versionSpec: "16.14.2"
         displayName: Install NodeJS.
       - script: |
           git config --local user.name "{{ cookiecutter.author_name }}"
