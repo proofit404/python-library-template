@@ -66,6 +66,9 @@ yamllint --strict .
 echo "==> Running toml-sort…"
 git ls-files '*.toml' | xargs toml-sort --all --no-header --check
 
+echo "==> Running tox-ini-fmt…"
+tox-ini-fmt tox.ini
+
 echo "==> Running jscpd…"
 npx jscpd src/
 

@@ -25,7 +25,6 @@ def _main():
     _tox_environments_use_all_pyenv_versions()
     _tox_environments_use_max_base_python()
     _tox_envlist_contains_all_tox_environments()
-    _tox_no_default_environment()
     _tox_no_factor_environments()
     _tox_no_factor_deps()
     _tox_single_line_settings_are_written_same_line()
@@ -44,7 +43,6 @@ def _main():
     _tox_environments_are_ordered()
     _tox_settings_are_ordered()
     _tox_deps_are_ordered()
-    _tox_whitelist_externals_are_ordered()
     _tox_setenv_are_ordered()
     _packages_are_ordered()
     _build_requires_are_ordered()
@@ -88,8 +86,8 @@ def _tox_environments_use_all_pyenv_versions():
         f"py{major}{minor}" if interpreter == "cpython" else f"{interpreter}{major}"
         for interpreter, (major, minor) in _pyenv_interpreters()
     ]
-    for version in versions:
-        assert version in _tox_envlist()
+    envlist = _tox_envlist()
+    assert set(envlist).issuperset(set(versions))
 
 
 def _tox_environments_use_max_base_python():
@@ -99,13 +97,11 @@ def _tox_environments_use_max_base_python():
 
 
 def _tox_envlist_contains_all_tox_environments():
-    envlist = _tox_envlist()
+    envlist = ["testenv"] + [
+        e for e in _tox_envlist() if not re.match(r"py(py)?\d+", e)
+    ]
     config_environments = _tox_config_environments()
     assert envlist == config_environments
-
-
-def _tox_no_default_environment():
-    assert "testenv" not in _tox_ini()
 
 
 def _tox_no_factor_environments():
@@ -157,10 +153,11 @@ def _coverage_include_all_packages():
 
 
 def _coverage_environment_runs_at_the_end():
-    coverage_depends = [
+    coverage_depends = ["testenv"] + [
         e
         for p in _tox_split_envlist(_tox_ini()["testenv:coverage"]["depends"])
         for e in _tox_expand_names(p)
+        if not re.match(r"py(py)?\d+", e)
     ]
     runs_coverage = [
         env
@@ -179,8 +176,9 @@ def _ini_files_indentation():
         "tox.ini",
     ]:
         ini_text = open(ini_file).read()
-        assert not re.search(r"^ \S", ini_text, re.MULTILINE)
-        assert not re.search(r"^ {3}", ini_text, re.MULTILINE)
+        assert re.search(r"^\S", ini_text, re.MULTILINE) or re.search(
+            r"^ {4}", ini_text, re.MULTILINE
+        )
 
 
 def _ini_files_boolean_case():
@@ -266,12 +264,6 @@ def _tox_deps_are_ordered():
         assert deps == ordered
 
 
-def _tox_whitelist_externals_are_ordered():
-    for externals in _tox_config_values("whitelist_externals"):
-        externals = _lines(externals.value)
-        assert externals == sorted(externals)
-
-
 def _tox_setenv_are_ordered():
     for setenv in _tox_config_values("setenv"):
         setenv = _lines(setenv.value)
@@ -344,17 +336,16 @@ class _Settings:
     keys = [
         ("envlist", _Text),
         ("isolated_build", _Boolean),
+        ("setenv", _Text),
+        ("passenv", _Text),
         ("basepython", _String),
         ("skip_install", _Boolean),
         ("install_command", _String),
-        ("setenv", _Text),
-        ("passenv", _Text),
         ("deps", _Text),
-        ("commands_pre", _Text),
         ("commands", _Text),
         ("commands_post", _Text),
+        ("commands_pre", _Text),
         ("depends", _Text),
-        ("whitelist_externals", _Text),
     ]
 
     def _known(self):
@@ -387,10 +378,10 @@ def _tox_envlist():
 def _tox_split_envlist(string):
     # => _tox_split_envlist('py{36,37},doctest,flake8')
     # -> ['py{36,37}', 'doctest', 'flake8']
-    escaped = string
+    escaped = string.strip()
     while re.search(r"({[^,}]*),", escaped):
         escaped = re.subn(r"({[^,}]*),", r"\1:", escaped)[0]
-    parts = escaped.split(",")
+    parts = escaped.split("\n")
     return [re.subn(r":", ",", p)[0].strip() for p in parts]
 
 
