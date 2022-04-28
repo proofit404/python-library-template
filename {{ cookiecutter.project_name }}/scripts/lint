@@ -31,3 +31,6 @@ git ls-files | xargs misspell-fixer -rsn
 
 echo "==> Running toml-sort…"
 git ls-files '*.toml' | xargs toml-sort --all --no-header --in-place
+
+echo "==> Running tox-ini-fmt…"
+tox-ini-fmt tox.ini
