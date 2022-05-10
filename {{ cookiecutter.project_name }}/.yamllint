@@ -1,4 +1,6 @@
 ---
 extends: default
+rules:
+  line-length: disable
 ignore: |
   {% macro op() %}{% include '.gitignore' %}{% endmacro %}{{ op() | indent(2) -}}

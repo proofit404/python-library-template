@@ -1,7 +1,6 @@
 # {{ cookiecutter.public_module_name.replace('_', ' ')|capitalize }}
 
-[![azure-devops-builds]({{ cookiecutter.azure_build_badge_url }})]({{ cookiecutter.azure_build_url }})
-[![azure-devops-coverage]({{ cookiecutter.azure_coverage_badge_url }})]({{ cookiecutter.azure_coverage_url }})
+[![build]({{ cookiecutter.github_workflow_badge_url }})]({{ cookiecutter.github_workflow_url }})
 [![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
 [![python]({{ cookiecutter.python_version_badge_url }})]({{ cookiecutter.pypi_project }})
 
