@@ -1,18 +1,18 @@
 ---
-name: test
-on:
-  push:
-    branches:
-      - master
+name: pull request
+"on":
   pull_request:
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          git config --global user.name bot
-          git config --global user.email bot@example.com
       - uses: actions/checkout@v3
+        with:
+          ref: release
+          fetch-depth: 0
+      - run: |
+          git checkout develop || true
+          git checkout $GITHUB_HEAD_REF
       - uses: actions/setup-python@v3
         with:
           python-version: 3.8.12
@@ -30,4 +30,8 @@ jobs:
         with:
           node-version: 16.14.2
       - run: ./scripts/install
+      - run: ./scripts/check
       - run: ./scripts/test
+      - run: ./scripts/review
+        env:
+          DANGER_GITHUB_API_TOKEN: {{ cookiecutter.danger_github_api_token }}

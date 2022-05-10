@@ -4,9 +4,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-echo "==> Generate new project…"
+. venv/bin/activate
+
+echo "==> Generating new project…"
 mkdir ../Temp
-cruft create --no-input --output-dir=../Temp .
+cruft create --no-input --extra-context='{"danger_github_api_token":"XYZ"}' --output-dir=../Temp .
 cd ../Temp/*
 rm README.md
 rm .prettierignore
@@ -17,7 +19,7 @@ ln -s .gitignore .prettierignore
 ln -s .gitignore .remarkignore
 ln -s .gitignore .eslintignore
 
-echo "==> Initialize repository…"
+echo "==> Initializing repository…"
 git init
 git checkout -b release
 git commit -m 'Hello world.' --allow-empty
@@ -25,7 +27,7 @@ git checkout -b issue-123
 git add .
 git commit -m 'build: initialize project'
 
-echo "==> Run project tests…"
+echo "==> Running project tests…"
 ./scripts/install
 ./scripts/check
 ./scripts/test

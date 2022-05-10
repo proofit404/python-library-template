@@ -19,6 +19,7 @@ $ pip install cruft
 Create project:
 
 ```bash
+$ echo $DANGER_GITHUB_API_TOKEN | base64
 $ cruft create https://github.com/proofit404/python-library-template
 ```
 
