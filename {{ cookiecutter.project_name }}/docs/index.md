@@ -1,8 +1,4 @@
-# {{ cookiecutter.public_module_name.replace('_', ' ')|capitalize }}
-
-[![build]({{ cookiecutter.github_workflow_badge_url }})]({{ cookiecutter.github_workflow_url }})
-[![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
-[![python]({{ cookiecutter.python_version_badge_url }})]({{ cookiecutter.pypi_project }})
+# {{ cookiecutter.public_module_name.replace('_', ' ')|capitalize }} [![build]({{ cookiecutter.github_workflow_badge_url }})]({{ cookiecutter.github_workflow_url }}) [![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
 
 {{ cookiecutter.project_description }}
 
