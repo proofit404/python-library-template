@@ -17,6 +17,5 @@
     "github_workflow_url": "https://github.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/actions/workflows/{{ cookiecutter.github_workflow }}.yml?query=branch%3Arelease",
     "github_workflow_badge_url": "https://img.shields.io/github/workflow/status/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/{{ cookiecutter.github_workflow }}?style=flat-square",
     "pypi_badge_url": "https://img.shields.io/pypi/v/{{ cookiecutter.project_name }}?style=flat-square",
-    "python_version_badge_url": "https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_name }}?style=flat-square",
     "danger_github_api_token": ""
 }
