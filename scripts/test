@@ -26,8 +26,17 @@ git commit -m 'Hello world.' --allow-empty
 git checkout -b issue-123
 git add .
 git commit -m 'build: initialize project'
+cat > tests/test_exceptions.py <<EOF
+"""Tests related to exceptions."""
+from the_library.exceptions import TheLibraryError
+def test_exception():
+    """Check exceptions."""
+    assert issubclass(TheLibraryError, Exception)
+EOF
+git add .
 
 echo "==> Running project tests…"
 ./scripts/install
+./scripts/lint
 ./scripts/check
 ./scripts/test
