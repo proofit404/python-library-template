@@ -2,4 +2,4 @@
 from {{ cookiecutter.private_module_name }}.exceptions import {{ cookiecutter.exception_name }}
 
 
-__all__ = ["{{ cookiecutter.exception_name }}"]
+__all__ = ("{{ cookiecutter.exception_name }}",)
