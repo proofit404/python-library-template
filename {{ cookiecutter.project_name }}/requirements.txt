@@ -26,6 +26,7 @@ flake8-tidy-imports
 import-linter
 mkdocs
 mkdocs-material
+mypy
 perflint
 poetry
 pre-commit
