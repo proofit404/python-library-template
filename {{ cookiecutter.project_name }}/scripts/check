@@ -39,6 +39,9 @@ flake8 .
 echo "==> Running yesqa…"
 git ls-files '*.py' | xargs yesqa
 
+echo "==> Running mypy…"
+git ls-files -z '*.py' | xargs -0 mypy
+
 echo "==> Running perflint…"
 perflint src/
 
