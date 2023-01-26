@@ -6,24 +6,6 @@
 [Source Code]({{ cookiecutter.github_repository }}) |
 [Task Tracker]({{ cookiecutter.issues_url }})**
 
-A paragraph of text explaining the goal of the library…
-
-## Pros
-
-- A feature
-- B feature
-- etc
-
-## Example
-
-A line of text explaining snippet below…
-
-```pycon
-
->>> from {{ cookiecutter.public_module_name }} import *
-
-```
-
 ## Questions
 
 If you have any questions, feel free to create an issue in our
