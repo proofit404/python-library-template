@@ -5,6 +5,7 @@ blacken-docs
 coverage
 cruft
 docformatter
+eradicate
 flake8
 flake8-2020
 flake8-annotations-complexity
@@ -13,7 +14,7 @@ flake8-bugbear
 flake8-builtins
 flake8-cognitive-complexity
 flake8-comprehensions
-flake8-eradicate
+flake8-docstrings
 flake8-executable
 flake8-expression-complexity
 flake8-fixme

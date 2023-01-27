@@ -17,6 +17,9 @@ git ls-files '*.py' | xargs reorder-python-imports --application-directories=.:s
 echo "==> Running docformatter…"
 git ls-files '*.py' | xargs docformatter --wrap-summaries 88 --wrap-descriptions 88 --blank --in-place
 
+echo "==> Running eradicate…"
+git ls-files '*.py' | xargs eradicate --aggressive --in-place
+
 echo "==> Running black…"
 black .
 
