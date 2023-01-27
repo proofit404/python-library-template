@@ -29,7 +29,7 @@ git commit -m 'build: initialize project'
 cat > tests/test_exceptions.py <<EOF
 """Tests related to exceptions."""
 from the_library.exceptions import TheLibraryError
-def test_exception():
+def test_exception() -> None:
     """Check exceptions."""
     assert issubclass(TheLibraryError, Exception)
 EOF

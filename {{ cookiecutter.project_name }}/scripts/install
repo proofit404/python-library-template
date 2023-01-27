@@ -14,7 +14,6 @@ fi
 
 echo "==> Installing python dependencies…"
 pip install -r requirements.txt
-patch venv/lib/python3.10/site-packages/blacken_docs.py blacken-docs.patch
 
 echo "==> Installing node dependencies…"
 npm install

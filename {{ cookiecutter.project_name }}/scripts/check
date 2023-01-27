@@ -6,9 +6,6 @@ set -o pipefail
 
 . venv/bin/activate
 
-echo "==> Checking configuration…"
-PYTHONPATH=$PWD/testing coverage run -m configuration
-
 echo "==> Running pre-commit…"
 pre-commit run --all-files --show-diff-on-failure
 
@@ -26,9 +23,6 @@ git ls-files '*.py' | xargs eradicate --aggressive --in-place --error
 
 echo "==> Running black…"
 black --check --diff .
-
-echo "==> Running blacken-docs…"
-git ls-files '*.md' | xargs blacken-docs
 
 echo "==> Running prettier…"
 npx prettier --prose-wrap=always --check .
