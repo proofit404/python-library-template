@@ -1,7 +1,5 @@
 bandit
-better_exceptions
 black
-blacken-docs
 coverage
 cruft
 docformatter

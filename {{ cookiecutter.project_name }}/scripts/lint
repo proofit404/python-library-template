@@ -23,9 +23,6 @@ git ls-files '*.py' | xargs eradicate --aggressive --in-place
 echo "==> Running black…"
 black .
 
-echo "==> Running blacken-docs…"
-git ls-files '*.md' | xargs blacken-docs
-
 echo "==> Running prettier…"
 npx prettier --prose-wrap=always --write .
 

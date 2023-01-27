@@ -6,8 +6,6 @@ disable_warnings =
 source =
   {{ cookiecutter.private_module_name }}
   {{ cookiecutter.public_module_name }}
-  configuration
-  mddoctest
   tests
 
 [paths]

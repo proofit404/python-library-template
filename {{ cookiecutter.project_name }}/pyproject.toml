@@ -5,8 +5,8 @@ requires = ["poetry-core"]
 [tool.poetry]
 authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
 classifiers = [
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
 ]
 description = "{{ cookiecutter.project_description }}"
 documentation = "{{ cookiecutter.documentation_url }}"
@@ -14,8 +14,8 @@ homepage = "{{ cookiecutter.pypi_project }}"
 license = "BSD-2-Clause"
 name = "{{ cookiecutter.project_name }}"
 packages = [
-    { include = "{{ cookiecutter.private_module_name }}", from = "src" },
-    { include = "{{ cookiecutter.public_module_name }}", from = "src" },
+  { include = "{{ cookiecutter.private_module_name }}", from = "src" },
+  { include = "{{ cookiecutter.public_module_name }}", from = "src" },
 ]
 readme = "docs/index.md"
 repository = "{{ cookiecutter.github_repository }}"
