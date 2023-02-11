@@ -1,12 +1,13 @@
 ---
-name: release
+name: pipeline
 "on":
   push:
     branches:
       - release
       - develop
+  pull_request:
 jobs:
-  ci:
+  pipeline:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +26,12 @@ jobs:
       - run: ./scripts/install
       - run: ./scripts/check
       - run: ./scripts/test
+      - run: ./scripts/review
+        if: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
+        env:
+          DANGER_GITHUB_API_TOKEN: {{ cookiecutter.danger_github_api_token }}
       - run: ./scripts/release
-{% raw %}        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}{% endraw %}
+        if: {% raw %}${{ github.ref == 'refs/heads/release' || github.ref == 'refs/heads/develop' }}{% endraw %}
+        env:
+          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          POETRY_PYPI_TOKEN_PYPI: {% raw %}${{ secrets.PYPI_TOKEN }}{% endraw %}
