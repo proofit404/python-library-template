@@ -10,10 +10,10 @@ echo "==> Running pre-commit…"
 pre-commit run --all-files --show-diff-on-failure
 
 echo "==> Running pyupgrade…"
-git ls-files '*.py' | xargs pyupgrade --py37-plus
+git ls-files '*.py' | xargs pyupgrade --py311-plus
 
 echo "==> Running reorder-python-imports…"
-git ls-files '*.py' | xargs reorder-python-imports --application-directories=.:src:testing
+git ls-files '*.py' | xargs reorder-python-imports --py311-plus --application-directories=src
 
 echo "==> Running docformatter…"
 git ls-files '*.py' | xargs docformatter --wrap-summaries 88 --wrap-descriptions 88 --blank --check
@@ -22,7 +22,7 @@ echo "==> Running eradicate…"
 git ls-files '*.py' | xargs eradicate --aggressive --in-place --error
 
 echo "==> Running black…"
-black --check --diff .
+black --target-version=py311 --quiet --diff --check .
 
 echo "==> Running prettier…"
 npx prettier --prose-wrap=always --check .
@@ -68,9 +68,6 @@ yamllint --strict .
 
 echo "==> Running toml-sort…"
 git ls-files '*.toml' | xargs toml-sort --all --no-header --check
-
-echo "==> Running tox-ini-fmt…"
-tox-ini-fmt tox.ini
 
 echo "==> Running jscpd…"
 npx jscpd src/

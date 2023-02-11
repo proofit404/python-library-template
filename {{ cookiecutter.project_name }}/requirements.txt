@@ -28,11 +28,10 @@ mypy
 perflint
 poetry
 pre-commit
+pytest
 pyupgrade
 reorder-python-imports
 toml-sort
-tox
-tox-ini-fmt
 xenon
 yamllint
 yesqa

@@ -6,5 +6,9 @@ set -o pipefail
 
 . venv/bin/activate
 
-echo "==> Running tox…"
-tox --parallel --parallel-live
+echo "==> Running pytest…"
+coverage run -m pytest
+
+echo "==> Running coverage…"
+coverage combine
+coverage report --fail-under 100
