@@ -6,37 +6,63 @@ set -o pipefail
 
 . venv/bin/activate
 
-echo "==> Generating new project…"
 mkdir ../Temp
+
 cruft create --no-input --extra-context='{"danger_github_api_token":"XYZ"}' --output-dir=../Temp .
+
 cd ../Temp/*
-rm README.md
-rm .prettierignore
-rm .remarkignore
-rm .eslintignore
-ln -s docs/index.md README.md
-ln -s .gitignore .prettierignore
-ln -s .gitignore .remarkignore
-ln -s .gitignore .eslintignore
 
-echo "==> Initializing repository…"
 git init
+
 git checkout -b release
+
 git commit -m 'Hello world.' --allow-empty
+
 git checkout -b issue-123
-git add .
-git commit -m 'build: initialize project'
-cat > tests/test_exceptions.py <<EOF
-"""Tests related to exceptions."""
-from the_library.exceptions import TheLibraryError
-def test_exception() -> None:
-    """Check exceptions."""
-    assert issubclass(TheLibraryError, Exception)
-EOF
+
 git add .
 
-echo "==> Running project tests…"
+git commit -m 'build: initialize project'
+
+cat > tests/test_the_library.py <<'EOF'
+import the_library
+def test_the_library()->None:
+    assert the_library is not None
+EOF
+
+cat > examples/first.py <<'EOF'
+print("1")
+EOF
+
+cat > examples/first.log <<'EOF'
+1
+EOF
+
+cat > docs/the_library.md <<'EOF'
+```python
+--8<-- "examples/first.py"
+```
+```text
+--8<-- "examples/first.log"
+```
+EOF
+
+echo "      - Library: the_library.md" >> mkdocs.yml
+
+git add .
+
 ./scripts/install
+
 ./scripts/lint
+
 ./scripts/check
+
 ./scripts/test
+
+venv/bin/coverage report | grep --quiet '^examples/first.py'
+
+venv/bin/coverage report | grep --quiet '^src/the_library/__init__.py'
+
+venv/bin/coverage report | grep --quiet '^tests/test_the_library.py'
+
+grep --quiet --invert-match --regexp='--8<--' site/the_library/index.html

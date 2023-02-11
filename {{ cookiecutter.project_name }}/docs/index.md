@@ -1,4 +1,4 @@
-# {{ cookiecutter.public_module_name.replace('_', ' ')|capitalize }} [![build]({{ cookiecutter.github_workflow_badge_url }})]({{ cookiecutter.github_workflow_url }}) [![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
+# {{ cookiecutter.project_name }} [![build]({{ cookiecutter.github_workflow_badge_url }})]({{ cookiecutter.github_workflow_url }}) [![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
 
 {{ cookiecutter.project_description }}
 
@@ -27,5 +27,3 @@ interested in it.
 ## License
 
 `{{ cookiecutter.project_name }}` library is offered under the two clause BSD license.
-
-<p align="center">&mdash; ⭐ &mdash;</p>

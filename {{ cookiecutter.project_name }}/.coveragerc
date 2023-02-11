@@ -1,16 +1,9 @@
 [run]
+source = .
 branch = true
 parallel = true
 disable_warnings =
   module-not-imported
-source =
-  {{ cookiecutter.private_module_name }}
-  {{ cookiecutter.public_module_name }}
-  tests
-
-[paths]
-source =
-  src
 
 [report]
 exclude_lines =

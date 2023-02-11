@@ -6,9 +6,13 @@ set -o pipefail
 
 . venv/bin/activate
 
-echo "==> Running pytest…"
 coverage run -m pytest
 
-echo "==> Running coverage…"
+for example in examples/*.py
+do
+    diff <(coverage run $example) ${example%.py}.log
+done
+
 coverage combine
+
 coverage report --fail-under 100

@@ -4,10 +4,8 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-echo "==> Creating virtual environment…"
 python3.11 -m venv venv
 
 . venv/bin/activate
 
-echo "==> Installing dependencies…"
 pip install -r requirements.txt

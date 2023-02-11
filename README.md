@@ -38,5 +38,3 @@ interested in it.
 ## License
 
 `python-library-template` is offered under the two clause BSD license.
-
-<p align="center">&mdash; ⭐ &mdash;</p>
