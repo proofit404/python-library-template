@@ -11,7 +11,6 @@ source =
 [paths]
 source =
   src
-  .tox/*/site-packages
 
 [report]
 exclude_lines =

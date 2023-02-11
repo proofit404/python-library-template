@@ -9,10 +9,10 @@ echo "==> Running pre-commit…"
 pre-commit run --all-files
 
 echo "==> Running pyupgrade…"
-git ls-files '*.py' | xargs pyupgrade --py37-plus
+git ls-files '*.py' | xargs pyupgrade --py311-plus
 
 echo "==> Running reorder-python-imports…"
-git ls-files '*.py' | xargs reorder-python-imports --application-directories=.:src:testing
+git ls-files '*.py' | xargs reorder-python-imports --py311-plus --application-directories=src
 
 echo "==> Running docformatter…"
 git ls-files '*.py' | xargs docformatter --wrap-summaries 88 --wrap-descriptions 88 --blank --in-place
@@ -21,7 +21,7 @@ echo "==> Running eradicate…"
 git ls-files '*.py' | xargs eradicate --aggressive --in-place
 
 echo "==> Running black…"
-black .
+black --target-version=py311 --quiet .
 
 echo "==> Running prettier…"
 npx prettier --prose-wrap=always --write .
@@ -31,6 +31,3 @@ git ls-files | xargs misspell-fixer -rsn
 
 echo "==> Running toml-sort…"
 git ls-files '*.toml' | xargs toml-sort --all --no-header --in-place
-
-echo "==> Running tox-ini-fmt…"
-tox-ini-fmt tox.ini
