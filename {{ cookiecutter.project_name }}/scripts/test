@@ -8,8 +8,9 @@ set -o pipefail
 
 coverage run -m pytest
 
-for example in examples/*.py
+for example in $(git ls-files 'examples/*.py')
 do
+    echo $example
     diff <(coverage run $example) ${example%.py}.log
 done
 
