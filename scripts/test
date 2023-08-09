@@ -24,12 +24,17 @@ git add .
 
 git commit -m 'build: initialize project'
 
+cat > testing/the_app.py <<'EOF'
+app: object | None = None
+EOF
+
 cat > tests/test_the_library.py <<'EOF'
+import the_app
 import the_library
 
 
 def test_the_library() -> None:
-    assert the_library is not None
+    assert the_library is not the_app
 EOF
 
 cat > examples/first.py <<'EOF'
@@ -63,6 +68,8 @@ git add .
 venv/bin/coverage report | grep --quiet '^examples/first.py'
 
 venv/bin/coverage report | grep --quiet '^src/the_library/__init__.py'
+
+venv/bin/coverage report | grep --quiet '^testing/the_app.py'
 
 venv/bin/coverage report | grep --quiet '^tests/test_the_library.py'
 
