@@ -6,6 +6,8 @@ def main():
     Path("testing").mkdir()
     Path("tests").mkdir()
 
+    Path("README.md").symlink_to("docs/index.md")
+
 
 if __name__ == "__main__":
     main()
