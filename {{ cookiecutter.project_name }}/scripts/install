@@ -13,3 +13,10 @@ pip install -r requirements.txt
 pip install -e .
 
 npm install
+
+pushd venv/bin
+for i in ../../node_modules/.bin/*
+do
+    ln -s $i $(basename $i)
+done
+popd

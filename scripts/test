@@ -26,7 +26,9 @@ git commit -m 'build: initialize project'
 
 cat > tests/test_the_library.py <<'EOF'
 import the_library
-def test_the_library()->None:
+
+
+def test_the_library() -> None:
     assert the_library is not None
 EOF
 
@@ -42,6 +44,7 @@ cat > docs/the_library.md <<'EOF'
 ```python
 --8<-- "examples/first.py"
 ```
+
 ```text
 --8<-- "examples/first.log"
 ```
@@ -52,8 +55,6 @@ echo "      - Library: the_library.md" >> mkdocs.yml
 git add .
 
 ./scripts/install
-
-./scripts/lint
 
 ./scripts/check
 
