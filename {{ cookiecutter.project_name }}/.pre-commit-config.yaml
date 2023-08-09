@@ -84,7 +84,7 @@ repos:
       - id: reorder-python-imports
         name: reorder-python-imports
         entry: reorder-python-imports
-        args: [--py311-plus, --application-directories=src]
+        args: [--py311-plus, "--application-directories=src:testing"]
         language: system
         types: [python]
       # docformatter

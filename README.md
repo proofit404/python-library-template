@@ -11,7 +11,6 @@ Python library template focused on code quality and security.
 Projects created from this cookie cutter template would have those nice things right from the start.
 
 - 100% code coverage
-- mutation testing setup
 - automated code reviews
 - release management
 - documentation first approach
