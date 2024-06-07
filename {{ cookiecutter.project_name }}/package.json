@@ -12,7 +12,6 @@
     "@typescript-eslint/parser": "*",
     "danger": "*",
     "eslint": "*",
-    "eslint-plugin-json": "*",
     "jscpd": "*",
     "prettier": "*",
     "remark-cli": "*",
