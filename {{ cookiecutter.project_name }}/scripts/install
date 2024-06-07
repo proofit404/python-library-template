@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-python3.11 -m venv venv
+python3.12 -m venv venv
 
 . venv/bin/activate
 
@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 pip install -e .
 
-echo $PWD/testing > venv/lib/python3.11/site-packages/testing.pth
+echo $PWD/testing > venv/lib/python3.12/site-packages/testing.pth
 
 npm install
 

@@ -1,7 +1,6 @@
 ---
 extends:
   - eslint:recommended
-  - plugin:json/recommended
   - plugin:@typescript-eslint/recommended
 parserOptions:
   ecmaVersion: 6

@@ -10,19 +10,19 @@ jobs:
   pipeline:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@4
         with:
           ref: release
           fetch-depth: 0
       - run: |
           git checkout develop || true
           git checkout $GITHUB_HEAD_REF
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.11.2
-      - uses: actions/setup-node@v3
+          python-version: 3.12.3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18.14.0
+          node-version: 18.19.1
       - run: ./scripts/install
       - run: ./scripts/check
       - run: ./scripts/test

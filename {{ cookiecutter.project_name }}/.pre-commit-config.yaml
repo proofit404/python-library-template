@@ -90,7 +90,7 @@ repos:
       - id: pyupgrade
         name: pyupgrade
         entry: pyupgrade
-        args: [--py311-plus]
+        args: [--py312-plus]
         language: system
         require_serial: true
         types: [python]
@@ -98,7 +98,7 @@ repos:
       - id: reorder-python-imports
         name: reorder-python-imports
         entry: reorder-python-imports
-        args: [--py311-plus, "--application-directories=src:testing"]
+        args: [--py312-plus, "--application-directories=src:testing"]
         language: system
         require_serial: true
         types: [python]
@@ -122,7 +122,7 @@ repos:
       - id: black
         name: black
         entry: black
-        args: [--target-version=py311]
+        args: [--target-version=py312]
         language: system
         require_serial: true
         types_or: [python, pyi]
