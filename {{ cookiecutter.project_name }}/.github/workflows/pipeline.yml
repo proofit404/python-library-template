@@ -22,7 +22,7 @@ jobs:
           python-version: 3.12.3
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.19.1
+          node-version: 22.6.0
       - run: ./scripts/install
       - run: ./scripts/check
       - run: ./scripts/test
