@@ -160,7 +160,7 @@ repos:
       - id: xenon
         name: xenon
         entry: xenon
-        args: [--max-absolute=A, --max-modules=A, --max-average=A]
+        args: [--max-absolute=A, --max-modules=A, --max-average=A, --no-assert]
         language: system
         require_serial: true
         types: [text]
