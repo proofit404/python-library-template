@@ -11,8 +11,8 @@
     "changelog_url": "{{ cookiecutter.documentation_url }}/changelog",
     "twitter_url": "https://twitter.com/proofit404",
     "pypi_project": "https://pypi.org/project/{{ cookiecutter.project_name }}",
-    "github_workflow_url": "https://github.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/actions/workflows/release.yml?query=branch%3Arelease",
-    "github_workflow_badge_url": "https://img.shields.io/github/actions/workflow/status/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/release.yml?branch=release&style=flat-square",
+    "github_workflow_url": "https://github.com/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/actions/workflows/pipeline.yml?query=branch%3Arelease",
+    "github_workflow_badge_url": "https://img.shields.io/github/actions/workflow/status/{{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}/pipeline.yml?branch=release&style=flat-square",
     "pypi_badge_url": "https://img.shields.io/pypi/v/{{ cookiecutter.project_name }}?style=flat-square",
     "danger_github_api_token": ""
 }
