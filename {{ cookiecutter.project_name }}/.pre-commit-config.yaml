@@ -152,7 +152,7 @@ repos:
       - id: mypy
         name: mypy
         entry: mypy
-        args: [--extra-checks]
+        args: [--extra-checks, --scripts-are-modules]
         language: system
         require_serial: true
         types_or: [python, pyi]
