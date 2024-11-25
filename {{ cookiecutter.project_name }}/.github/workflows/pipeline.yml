@@ -4,7 +4,6 @@ name: pipeline
   push:
     branches:
       - release
-      - develop
   pull_request:
 jobs:
   pipeline:
@@ -15,7 +14,6 @@ jobs:
           ref: release
           fetch-depth: 0
       - run: |
-          git checkout develop || true
           git checkout $GITHUB_HEAD_REF
       - uses: actions/setup-python@v5
         with:
@@ -31,7 +29,7 @@ jobs:
         env:
           DANGER_GITHUB_API_TOKEN: {{ cookiecutter.danger_github_api_token }}
       - run: ./scripts/release
-        if: {% raw %}${{ github.ref == 'refs/heads/release' || github.ref == 'refs/heads/develop' }}{% endraw %}
+        if: {% raw %}${{ github.ref == 'refs/heads/release' }}{% endraw %}
         env:
           GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
           POETRY_PYPI_TOKEN_PYPI: {% raw %}${{ secrets.PYPI_TOKEN }}{% endraw %}
