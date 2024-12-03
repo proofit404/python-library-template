@@ -191,7 +191,7 @@ repos:
       - id: toml-sort
         name: toml-sort
         entry: toml-sort
-        args: [--all, --no-header, --in-place]
+        args: [--all, --no-comments, --in-place]
         language: system
         require_serial: true
         types: [toml]
