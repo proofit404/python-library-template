@@ -8,7 +8,7 @@ repos:
         entry: check-added-large-files
         language: system
         require_serial: true
-        stages: [commit, push, manual]
+        stages: [pre-commit, pre-push, manual]
       - id: fix-byte-order-marker
         name: fix-byte-order-marker
         entry: fix-byte-order-marker
@@ -33,7 +33,7 @@ repos:
         language: system
         require_serial: true
         types: [text]
-        stages: [commit, push, manual]
+        stages: [pre-commit, pre-push, manual]
       - id: mixed-line-ending
         name: mixed-line-ending
         entry: mixed-line-ending
@@ -47,7 +47,7 @@ repos:
         language: system
         require_serial: true
         types: [text]
-        stages: [commit, push, manual]
+        stages: [pre-commit, pre-push, manual]
       - id: file-contents-sorter
         name: file-contents-sorter
         entry: file-contents-sorter
