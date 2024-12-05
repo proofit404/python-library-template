@@ -2,7 +2,7 @@
 strict: true
 site_name: {{ cookiecutter.project_name }}
 site_description: {{ cookiecutter.project_description }}
-site_url: {{ cookiecutter.documentation_url }}
+site_url: {{ cookiecutter.__documentation_url }}
 theme:
   name: material
   palette:
@@ -18,7 +18,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
 repo_name: {{ cookiecutter.github_user }}/{{ cookiecutter.project_name }}
-repo_url: {{ cookiecutter.github_repository }}
+repo_url: {{ cookiecutter.__github_repository }}
 edit_uri: ""
 markdown_extensions:
   - admonition
