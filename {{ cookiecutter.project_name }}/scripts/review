@@ -6,8 +6,8 @@ set -o pipefail
 
 . venv/bin/activate
 
-export DANGER_GITHUB_API_TOKEN=$(echo $DANGER_GITHUB_API_TOKEN | base64 --decode)
+{% if not cookiecutter.is_private %}export DANGER_GITHUB_API_TOKEN=$(echo $DANGER_GITHUB_API_TOKEN | base64 --decode)
 
-danger ci
+{% endif %}danger ci
 
 cruft check

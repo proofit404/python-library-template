@@ -2,7 +2,8 @@
 
 {{ cookiecutter.project_description }}
 
-**[Documentation]({{ cookiecutter.__documentation_url }}) |
+**{% if not cookiecutter.is_private %}[PyPI]({{ cookiecutter.__pypi_project }}) |
+{% endif %}[Documentation]({{ cookiecutter.__documentation_url }}) |
 [Source Code]({{ cookiecutter.__github_repository }}) |
 [Task Tracker]({{ cookiecutter.__issues_url }})**
 
@@ -26,4 +27,4 @@ interested in it.
 
 ## License
 
-`{{ cookiecutter.project_name }}` library is offered under the two clause BSD license.
+`{{ cookiecutter.project_name }}` library is offered under {% if cookiecutter.is_private %}proprietary{% else %}the two clause BSD{% endif %} license.

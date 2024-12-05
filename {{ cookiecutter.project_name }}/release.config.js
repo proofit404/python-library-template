@@ -24,8 +24,8 @@ module.exports = {
           "./scripts/check ; " +
           "poetry version ${nextRelease.version} && " +
           "npm version --no-git-tag-version ${nextRelease.version} && " +
-          "poetry build",
-        publishCmd: "poetry publish",
+          "poetry build",{% if not cookiecutter.is_private %}
+        publishCmd: "poetry publish",{% endif %}
       },
     ],
     [

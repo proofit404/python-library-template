@@ -7,6 +7,11 @@ on:
   pull_request:
 jobs:
   test:
+    strategy:
+      matrix:
+        private:
+          - 'false'
+          - 'true'
     runs-on: ubuntu-latest
     steps:
       - run: |
@@ -21,3 +26,5 @@ jobs:
           node-version: 22.6.0
       - run: ./scripts/install
       - run: ./scripts/test
+        env:
+          PRIVATE: ${{ matrix.private }}

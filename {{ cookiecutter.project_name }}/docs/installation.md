@@ -1,10 +1,8 @@
 # Installation
 
-The `{{ cookiecutter.project_name }}` library is available on PyPI.
+{% if not cookiecutter.is_private %}The `{{ cookiecutter.project_name }}` library is available on PyPI.
 
-To install it run:
-
-```bash
+{% endif %}```bash
 pip install -U {{ cookiecutter.project_name }}
 ```
 

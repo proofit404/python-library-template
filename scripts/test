@@ -4,11 +4,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+PRIVATE="${PRIVATE:-false}"
+
 . venv/bin/activate
 
 mkdir ../Temp
 
-cruft create --no-input --extra-context='{"danger_github_api_token":"XYZ"}' --output-dir=../Temp .
+cruft create --no-input --extra-context="{\"is_private\":${PRIVATE},\"danger_github_api_token\":\"XYZ\"}" --output-dir=../Temp .
 
 cd ../Temp/*
 
@@ -74,3 +76,10 @@ venv/bin/coverage report | grep --quiet '^testing/the_app.py'
 venv/bin/coverage report | grep --quiet '^tests/test_the_library.py'
 
 grep --quiet --invert-match --regexp='--8<--' site/the_library/index.html
+
+if [ "${PRIVATE}" = "true" ]
+then
+    test ! -f LICENSE
+else
+    test -f LICENSE
+fi
