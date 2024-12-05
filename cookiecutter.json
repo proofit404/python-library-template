@@ -1,4 +1,5 @@
 {
+    "is_private": false,
     "project_name": "the-library",
     "__module_name": "{{ cookiecutter.project_name|lower|replace('-', '_') }}",
     "project_description": "The library description.",
@@ -11,5 +12,9 @@
     "__changelog_url": "{{ cookiecutter.__documentation_url }}/changelog",
     "twitter_url": "https://twitter.com/proofit404",
     "__pypi_project": "https://pypi.org/project/{{ cookiecutter.project_name }}",
-    "danger_github_api_token": ""
+    "danger_github_api_token": "",
+    "__prompts__": {
+	"is_private": "Is this a private repository?",
+	"danger_github_api_token": "GitHub token for Danger tool (Public repository only)"
+    }
 }

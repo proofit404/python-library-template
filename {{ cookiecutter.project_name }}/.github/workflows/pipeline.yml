@@ -27,9 +27,9 @@ jobs:
       - run: ./scripts/review
         if: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
         env:
-          DANGER_GITHUB_API_TOKEN: {{ cookiecutter.danger_github_api_token }}
+          DANGER_GITHUB_API_TOKEN: {% if cookiecutter.is_private %}{% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}{% else %}{{ cookiecutter.danger_github_api_token }}{% endif %}
       - run: ./scripts/release
         if: {% raw %}${{ github.ref == 'refs/heads/release' }}{% endraw %}
         env:
-          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-          POETRY_PYPI_TOKEN_PYPI: {% raw %}${{ secrets.PYPI_TOKEN }}{% endraw %}
+          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}{% if not cookiecutter.is_private %}
+          POETRY_PYPI_TOKEN_PYPI: {% raw %}${{ secrets.PYPI_TOKEN }}{% endraw %}{% endif %}
