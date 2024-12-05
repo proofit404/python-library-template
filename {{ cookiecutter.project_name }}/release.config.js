@@ -1,5 +1,5 @@
 module.exports = {
-  repositoryUrl: "{{ cookiecutter.github_repository }}",
+  repositoryUrl: "{{ cookiecutter.__github_repository }}",
   branches: ["release"],
   tagFormat: "${version}",
   plugins: [

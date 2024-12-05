@@ -1,16 +1,16 @@
-# {{ cookiecutter.project_name }} [![build]({{ cookiecutter.github_workflow_badge_url }})]({{ cookiecutter.github_workflow_url }}) [![pypi]({{ cookiecutter.pypi_badge_url }})]({{ cookiecutter.pypi_project }})
+# {{ cookiecutter.project_name }}
 
 {{ cookiecutter.project_description }}
 
-**[Documentation]({{ cookiecutter.documentation_url }}) |
-[Source Code]({{ cookiecutter.github_repository }}) |
-[Task Tracker]({{ cookiecutter.issues_url }})**
+**[Documentation]({{ cookiecutter.__documentation_url }}) |
+[Source Code]({{ cookiecutter.__github_repository }}) |
+[Task Tracker]({{ cookiecutter.__issues_url }})**
 
 ## Questions
 
 If you have any questions, feel free to create an issue in our
-[Task Tracker]({{ cookiecutter.issues_url }}). We have the
-[question label]({{ cookiecutter.issues_url }}?q=is%3Aopen+is%3Aissue+label%3Aquestion)
+[Task Tracker]({{ cookiecutter.__issues_url }}). We have the
+[question label]({{ cookiecutter.__issues_url }}?q=is%3Aopen+is%3Aissue+label%3Aquestion)
 exactly for this purpose.
 
 ## Enterprise support

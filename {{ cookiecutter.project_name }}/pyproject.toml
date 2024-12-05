@@ -5,18 +5,18 @@ requires = ["poetry-core"]
 [tool.poetry]
 authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
 description = "{{ cookiecutter.project_description }}"
-documentation = "{{ cookiecutter.documentation_url }}"
-homepage = "{{ cookiecutter.pypi_project }}"
+documentation = "{{ cookiecutter.__documentation_url }}"
+homepage = "{{ cookiecutter.__pypi_project }}"
 license = "BSD-2-Clause"
 name = "{{ cookiecutter.project_name }}"
 readme = "docs/index.md"
-repository = "{{ cookiecutter.github_repository }}"
+repository = "{{ cookiecutter.__github_repository }}"
 version = "0.0.1dev0"
 
 [tool.poetry.dependencies]
 python = "*"
 
 [tool.poetry.urls]
-Changelog = "{{ cookiecutter.changelog_url }}"
-Issues = "{{ cookiecutter.issues_url }}"
+Changelog = "{{ cookiecutter.__changelog_url }}"
+Issues = "{{ cookiecutter.__issues_url }}"
 Twitter = "{{ cookiecutter.twitter_url }}"
