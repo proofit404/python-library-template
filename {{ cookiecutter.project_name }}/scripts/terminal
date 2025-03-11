@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+docker run --rm --network=none --volume=.:/src --interactive --tty {{ cookiecutter.docker_tag }}:latest bash

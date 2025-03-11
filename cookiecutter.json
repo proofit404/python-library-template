@@ -13,6 +13,7 @@
     "twitter_url": "https://twitter.com/proofit404",
     "__pypi_project": "https://pypi.org/project/{{ cookiecutter.project_name }}",
     "danger_github_api_token": "",
+    "docker_tag": "{{ cookiecutter.__module_name }}",
     "__prompts__": {
 	"is_private": "Is this a private repository?",
 	"danger_github_api_token": "GitHub token for Danger tool (Public repository only)"
