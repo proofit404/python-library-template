@@ -6,6 +6,8 @@ set -o pipefail
 
 . venv/bin/activate
 
+coverage erase
+
 coverage run -m pytest
 
 for example in $(git ls-files 'examples/*.py')
