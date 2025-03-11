@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+docker build --tag {{ cookiecutter.docker_tag }} .
+
+docker run --rm --volume=.:/src --interactive --tty {{ cookiecutter.docker_tag }}:latest ./scripts/install
