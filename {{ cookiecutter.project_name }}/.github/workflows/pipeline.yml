@@ -17,10 +17,10 @@ jobs:
           git checkout $GITHUB_HEAD_REF
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.12.3
+          python-version: 3.13
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.6.0
+          node-version: latest
       - run: ./scripts/install
       - run: ./scripts/check
       - run: ./scripts/test
