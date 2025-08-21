@@ -37,10 +37,16 @@ export default async (): undefined => {
       .concat(danger.git.modified_files)
       .concat(danger.git.deleted_files),
     hasDocsChanges = commitFiles.some(
-      (fileName) => fileName.startsWith("docs/") || fileName === "mkdocs.yml",
+      (fileName) =>
+        fileName.startsWith("docs/") ||
+        fileName.startsWith("examples/") ||
+        fileName === "mkdocs.yml",
     ),
     hasTestChanges = commitFiles.some(
-      (fileName) => fileName.startsWith("tests/") || fileName === "pytest.ini",
+      (fileName) =>
+        fileName.startsWith("tests/") ||
+        fileName.startsWith("testing/") ||
+        fileName === "pytest.ini",
     ),
     hasSourceChanges = commitFiles.some(
       (fileName) =>
