@@ -101,7 +101,7 @@ repos:
         args: [check, --fix]
         language: system
         require_serial: true
-        types: [python, pyi]
+        types_or: [python, pyi]
       - id: ruff-format
         name: ruff format
         entry: ruff
