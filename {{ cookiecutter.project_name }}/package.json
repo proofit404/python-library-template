@@ -15,7 +15,6 @@
     "danger": "*",
     "eslint": "*",
     "globals": "*",
-    "jscpd": "*",
     "prettier": "*",
     "remark-cli": "*",
     "remark-lint": "*",

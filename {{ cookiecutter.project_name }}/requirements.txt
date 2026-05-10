@@ -1,6 +1,5 @@
 coverage
 cruft
-docformatter
 mkdocs
 mkdocs-material
 mypy
@@ -11,5 +10,4 @@ pytest
 reorder-python-imports
 ruff
 toml-sort
-xenon
 yamllint
