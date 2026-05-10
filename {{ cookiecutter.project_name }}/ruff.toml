@@ -1,0 +1,11 @@
+cache-dir = ".cache/ruff/"
+line-length = 88
+
+[lint]
+select = ["E", "ERA", "F", "PT", "PTH", "Q", "RUF", "TID", "UP", "W"]
+
+[lint.flake8-pytest-style]
+mark-parentheses = true
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "all"
