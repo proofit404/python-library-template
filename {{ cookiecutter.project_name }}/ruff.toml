@@ -5,6 +5,7 @@ line-length = 88
 select = ["E", "ERA", "F", "PT", "PTH", "Q", "RUF", "TID", "UP", "W"]
 
 [lint.flake8-pytest-style]
+fixture-parentheses = true
 mark-parentheses = true
 
 [lint.flake8-tidy-imports]
