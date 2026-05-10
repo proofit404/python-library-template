@@ -86,14 +86,6 @@ repos:
         language: system
         require_serial: true
         types: [yaml]
-      # pyupgrade
-      - id: pyupgrade
-        name: pyupgrade
-        entry: pyupgrade
-        args: [--py313-plus]
-        language: system
-        require_serial: true
-        types: [python]
       # reorder-python-imports
       - id: reorder-python-imports
         name: reorder-python-imports
@@ -110,19 +102,18 @@ repos:
         language: system
         require_serial: true
         types: [python]
-      # eradicate
-      - id: eradicate
-        name: eradicate
-        entry: eradicate
-        args: [--aggressive, --in-place, --error]
+      # ruff
+      - id: ruff-check
+        name: ruff check
+        entry: ruff
+        args: [check, --fix]
         language: system
         require_serial: true
-        types: [python]
-      # black
-      - id: black
-        name: black
-        entry: black
-        args: [--target-version=py313]
+        types: [python, pyi]
+      - id: ruff-format
+        name: ruff format
+        entry: ruff
+        args: [format]
         language: system
         require_serial: true
         types_or: [python, pyi]
@@ -134,20 +125,6 @@ repos:
         language: system
         require_serial: true
         types: [text]
-      # flake8
-      - id: flake8
-        name: flake8
-        entry: flake8
-        language: system
-        require_serial: true
-        types: [python]
-      # yesqa
-      - id: yesqa
-        name: yesqa
-        entry: yesqa
-        language: system
-        require_serial: true
-        types: [python]
       # mypy
       - id: mypy
         name: mypy
