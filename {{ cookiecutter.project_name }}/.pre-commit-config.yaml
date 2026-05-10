@@ -94,14 +94,6 @@ repos:
         language: system
         require_serial: true
         types: [python]
-      # docformatter
-      - id: docformatter
-        name: docformatter
-        entry: docformatter
-        args: [--wrap-summaries=88, --wrap-descriptions=88, --blank, --in-place]
-        language: system
-        require_serial: true
-        types: [python]
       # ruff
       - id: ruff-check
         name: ruff check
@@ -133,14 +125,6 @@ repos:
         language: system
         require_serial: true
         types_or: [python, pyi]
-      # xenon
-      - id: xenon
-        name: xenon
-        entry: xenon
-        args: [--max-absolute=A, --max-modules=A, --max-average=A, --no-assert]
-        language: system
-        require_serial: true
-        types: [text]
       # remark
       - id: remark
         name: remark
@@ -172,10 +156,3 @@ repos:
         language: system
         require_serial: true
         types: [toml]
-      # jscpd
-      - id: jscpd
-        name: jscpd
-        entry: jscpd
-        language: system
-        require_serial: true
-        types: [text]
