@@ -6,7 +6,7 @@ set -o pipefail
 
 docker build --tag {{ cookiecutter.docker_tag }} .
 
-docker run --rm --volume=.:/src --interactive --tty {{ cookiecutter.docker_tag }}:latest  bash -c '
+docker run --rm --volume=.:/src --interactive --tty {{ cookiecutter.docker_tag }}:latest bash -c '
   . $HOME/.nvm/nvm.sh
   ./scripts/install
 '
