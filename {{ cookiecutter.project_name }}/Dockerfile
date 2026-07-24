@@ -6,7 +6,7 @@ RUN <<EOF
 set -e
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get --no-install-recommends install -y git python3 python3-venv
+apt-get --no-install-recommends install -y ca-certificates curl git python3 python3-venv
 rm -rf /var/lib/apt/lists/*
 EOF
 
